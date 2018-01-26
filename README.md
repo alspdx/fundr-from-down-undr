@@ -8,7 +8,7 @@
 
 [X] As a user, I want to be able to filter projects as I browse them. Perhaps by the amount of funding they still require, or whether they're charitable acts, ideas for products, or other.
 
-[ ] As a user, I want to click a button or fill out a form to fund a project.
+[X] As a user, I want to click a button or fill out a form to fund a project.
 s
 [ ] As a user, I want the option to post my own project or charitable act that seeks funding.
 

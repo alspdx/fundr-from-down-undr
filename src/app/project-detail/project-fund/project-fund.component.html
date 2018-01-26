@@ -1,9 +1,18 @@
-<div >
-  <input #contributorName>
-  <input #amountUSD>
-  <input #comment>
-  <button (click)="submitForm(contributorName.value, amountUSD.value, comment.value);
-    contributorName.value='';
-    amountUSD.value='';
-    comment.value='';">Submit!</button>
+<div>
+  <div class="contribution-form">
+    <label>Your name: </label>
+    <input #contributorName>
+    <label>Amount you would like to contribute: </label>
+    <input #amountUSD>
+    <label>Leave a comment!</label>
+    <textarea #comment></textarea>
+    <div class="buttons">
+      <button (click)="submitForm(contributorName.value, amountUSD.value, comment.value);
+      contributorName.value='';
+      amountUSD.value='';
+      comment.value='';">Submit!</button>
+      <button (click)="cancelForm()">Cancel</button>
+    </div>
+  </div>
 </div>
+<span class="warning" *ngIf="formWarning">You did not complete the form. Try harder next time.</span>

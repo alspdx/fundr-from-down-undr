@@ -12,12 +12,12 @@ import { ProjectsService } from '../projects.service';
   styleUrls: ['./project-detail.component.scss'],
   providers: [ProjectsService]
 })
+
 export class ProjectDetailComponent implements OnInit {
-  project;
-  projectContributions: any[] = [];
+  project: Project;
   projectId: string;
   selectedProjectKey: string = null;
-
+  projectContributions: any[] = [];
   currentRoute: string = this.currRoute.url;
 
   constructor(
@@ -30,19 +30,22 @@ export class ProjectDetailComponent implements OnInit {
     this.route.params.forEach((urlParameters) => {
       this.projectId = urlParameters['id'];
     });
-    
+
     this.projectsService.getProjectById(this.projectId).subscribe(projectLastEmitted => {
       this.project = projectLastEmitted;
     });
 
     this.projectsService.getContributionsById(this.projectId).subscribe(contributionsLastEmitted => {
       this.projectContributions = contributionsLastEmitted;
-    })
-
+    });
   }
 
   fundButtonClicked() {
     this.selectedProjectKey = this.projectId;
+  }
+
+  fundingComplete() {
+    this.selectedProjectKey = null;
   }
 
   contributionToDelete(projectId, contributionKey) {

@@ -1,0 +1,14 @@
+.contribution-form {
+  display: flex;
+  flex-direction: column;
+  label:nth-child(2n+1) {
+    margin-top: 20px;
+  }
+  textarea {
+    height: 300px;
+  }
+}
+
+.warning {
+  color: red;
+}

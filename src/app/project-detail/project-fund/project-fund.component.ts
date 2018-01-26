@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ProjectsService } from '../../projects.service';
 
@@ -8,8 +8,12 @@ import { ProjectsService } from '../../projects.service';
   styleUrls: ['./project-fund.component.scss'],
   providers: [ProjectsService]
 })
+
 export class ProjectFundComponent implements OnInit {
   @Input() childSelectedProjectKey: string;
+  @Output() closeFundFormClick = new EventEmitter();
+
+  formWarning: boolean = false;
 
   constructor(
     private projectsService: ProjectsService
@@ -19,8 +23,20 @@ export class ProjectFundComponent implements OnInit {
   }
 
   submitForm(name, amount, comment) {
-    console.log(this.childSelectedProjectKey);
-    this.projectsService.submitContribution(this.childSelectedProjectKey, name, amount, comment);
+    if (name && amount && comment) {
+      this.projectsService.submitContribution(this.childSelectedProjectKey, name, amount, comment);
+      this.formWarning = false;
+      this.closeFundFormClick.emit();
+    } else {
+      this.formWarning = true;
+    }
   }
 
+  cancelForm() {
+    if(confirm("Are you sure you don't want to fund this project?")) {
+      alert("Jerk!");
+      this.closeFundFormClick.emit();
+      this.formWarning = false;
+    }
+  }
 }
